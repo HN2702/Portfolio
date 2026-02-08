@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+}
+        
+hr{ 
+            border-color: rgba(255, 255, 255, 0.1); 
+              
+            border-width: 2px;}
+
+            /* Background overlay */
+    #project-popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.3s ease-in-out;
+    }
+
+    /* Pop-up box */
+    .popup-content {
+        background: #1e1e1e;
+        width: 90%;
+        max-width: 1000px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        border-radius: 10px;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Show pop-up */
+    #project-popup.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #project-popup.show .popup-content {
+        transform: scale(1);
+    }
+
+    /* Close button */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Grid layout */
+    .popup-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 20px;
+    }
+
+    /* Image */
+    .popup-img {
+        
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .tech-badge {
+        background: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    /* Buttons */
+    .popup-btns a {
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .popup-btns a:hover {
+        background: #0056b3;
+    }
+
+
+    .testimonial-slide {
+    min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+#testimonial-carousel {
+    display: flex;
+    width: 300%;
+}
+
+
+    </style>
+</head>
+
+
+
+
+<body class="bg-gray-900 text-white">
+   <!-- Navbar -->
+<nav class="p-4 flex justify-between items-center bg-gray-800 fixed w-full top-0 z-10">
+    <h1 class="text-2xl font-bold gradient-text">My Portfolio</h1>
+    <div class="hidden md:flex space-x-8">  <!-- Increased space-x from 4 to 8 -->
+        <a href="#projects" class="hover:text-gray-400">Projects</a>
+        <a href="#services" class="hover:text-gray-400">Services</a>
+        <a href="#process" class="hover:text-gray-400">Process</a>
+        <a href="#about" class="hover:text-gray-400">About</a>
+        <a href="#contact" class="hover:text-gray-400">Contact</a>
+        <a href="#blog" class="hover:text-gray-400">Blog</a>
+    </div>
+</nav>
+
+
+
+  <!-- Hero Section -->
+<section id="hero" class="relative flex items-center justify-center min-h-screen bg-black text-white overflow-hidden">
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-black opacity-90"></div>
+
+    <!-- Diagonal Pattern Layer -->
+    <div class="absolute inset-0 bg-hero-pattern opacity-30"></div>
+
+    <div class="container mx-auto px-6 lg:px-20 relative z-10 flex flex-col md:flex-row items-center justify-between">
+        <!-- Text Content -->
+        <div class="text-center md:text-left md:w-1/2" data-aos="fade-up">
+           <br><br><br>
+            <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                Hi, I'm <span class="text-blue-500">Hassan</span>
+            </h1>
+            <p class="mt-4 text-lg text-gray-300">
+                A passionate <span class="font-semibold text-white">Flutter & Web Developer</span> building sleek and high-performance applications.
+            </p>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#projects" class="hero-btn primary">🚀 View Projects</a>
+                <a href="#contact" class="hero-btn secondary">📩 Contact Me</a>
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="relative md:w-1/2 mt-12 md:mt-0 flex justify-center" data-aos="fade-left">
+            <div class="relative w-80 h-80 bg-opacity-20 backdrop-blur-lg rounded-full flex items-center justify-center border border-gray-700 shadow-xl">
+                <div class="photo-frame">
+                <img src="img/DP.jpeg" alt="Profile Picture" class="w-64 h-64 object-cover rounded-full">
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom CSS -->
+<style>
+    /* Diagonal Stripes Pattern */
+    .bg-hero-pattern {
+        background-image: url('img/bgPattern.jpg'); /* Replace with extracted pattern */
+        background-size: cover;
+        background-blend-mode: overlay; /* Merge with gradient */
+    }
+
+    /* Buttons */
+    .hero-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hero-btn.primary {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    }
+
+    .hero-btn.primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(0, 123, 255, 0.8);
+    }
+
+    .hero-btn.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .hero-btn.secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+/* Glowing Border Effect */
+.photo-frame {
+    position: relative;
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 50%;
+    padding: 8px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.w-64 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Glowing Ring Animation */
+.photo-frame::before {
+    content: "";
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(0, 162, 255, 0.8),
+        rgba(0, 162, 255, 0) 50%,
+        rgba(0, 162, 255, 0.8)
+    );
+    animation: rotateGlow 3s linear infinite;
+    z-index: 1;
+}
+
+/* Keyframes for Rotation */
+@keyframes rotateGlow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+    
+</style>
+
+
+
+
+
+<br><br><br>
+
+
+
+<!-- About Section -->
+<section id="about" class=" bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-16">
+    <div class="container mx-auto flex flex-col md:flex-row items-center">
+
+        <!-- Image Section -->
+        <div class="md:w-1/3 mb-6 md:mb-0 text-center" data-aos="fade-right">
+            <img src="img/DP.jpeg" alt="Your Image" class="w-54 h-80 mx-auto  border-4  shadow-lg">
+        </div>
+
+        <!-- Text Section -->
+        <div class="md:w-2/3 px-6 text-center md:text-left" data-aos="fade-left">
+            <h2 class="text-4xl font-extrabold mb-4">About Me</h2>
+            <p class="text-lg leading-relaxed">
+                Hi, I'm a Flutter Developer & Full Stack Web Developer passionate about building high-performance applications. 
+                I specialize in Flutter, React, Firebase, and UI/UX design, crafting seamless digital experiences with a strong focus on **performance, responsiveness, and innovation.
+            </p>
+
+            <p class="text-lg mt-4">
+                With a keen eye for design and a love for problem-solving, I thrive on turning ideas into reality through clean, scalable, and efficient code. 
+                My mission is to build apps that not only function flawlessly but also create amazing user experiences.
+            </p>
+
+            <!-- Hidden Read More Content -->
+            <div id="moreText" class="hidden">
+                <p class="text-lg mt-4">
+                    Beyond coding, I love brainstorming high-performance car builds, staying updated with the latest technologies, and pushing boundaries in software development.
+                </p>
+
+                <p class="text-lg mt-4 italic text-blue-300">
+                    "Great software isn't just about functionality—it's about the experience."  
+                </p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-6">
+                <button onclick="toggleReadMore()" id="readMoreBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg mr-4">
+                    📖 Read More
+                </button>
+                <a href="CV.pdf" download class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg">
+                    📄 Download Resume
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Stats Section -->
+    <div class="container mx-auto mt-12 flex flex-wrap justify-center text-center">
+        <div class="w-1/2 md:w-1/4 p-4" data-aos="fade-up">
+            <h3 class="text-4xl font-bold text-blue-400">3+</h3>
+            <p class="text-gray-300">Years of Experience</p>
+        </div>
+        <div class="w-1/2 md:w-1/4 p-4" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-4xl font-bold text-blue-400">20+</h3>
+            <p class="text-gray-300">Projects Completed</p>
+        </div>
+        <div class="w-1/2 md:w-1/4 p-4" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="text-4xl font-bold text-blue-400">5+</h3>
+            <p class="text-gray-300">Tech Stacks Mastered</p>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Read More Button -->
+<script>
+    function toggleReadMore() {
+        var moreText = document.getElementById("moreText");
+        var btnText = document.getElementById("readMoreBtn");
+
+        if (moreText.classList.contains("hidden")) {
+            moreText.classList.remove("hidden");
+            btnText.innerHTML = "🔽 Read Less";
+        } else {
+            moreText.classList.add("hidden");
+            btnText.innerHTML = "📖 Read More";
+        }
+    }
+</script>
+
+<!-- AOS Animation Script -->
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+
+
+<!-- AOS Animation Script -->
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+
+
+<!-- AOS Animation Script -->
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+
+
+<!-- AOS Animation Script -->
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+
+
+   <!-- Include AOS Library -->
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<br><br>
+
+<br><br>
+
+<!-- Skills Section -->
+<section class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-extrabold mb-8" data-aos="fade-up">My Skills</h2>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 md:px-20">
+            <!-- Skill Item -->
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="100">
+                <img src="img/fluticon.PNG" alt="Flutter" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">Flutter & Dart</h3>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="200">
+                <img src="img/pngegg.PNG" alt="HTML" class="w-16 mx-auto mb-2">
+                <h3 class="text-xl font-semibold">State Management</h3>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="300">
+                <img src="img/firebase.png" alt="CSS" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">Restful APIs & Firebase Integration</h3>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="400">
+                <img src="img/javascript.png" alt="JavaScript" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">JavaScript</h3>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="500">
+                <img src="img/reactl.png" alt="React" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">React</h3>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="600">
+                <img src="img/uxdesign.png" alt="" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">UI/UX Design</h3>
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="600">
+                <img src="img/Git.png" alt="" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">Git & Version Control</h3>
+            </div>
+<div class="p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-110" data-aos="fade-up" data-aos-delay="600">
+                <img src="img/bug.png" alt="" class="w-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold">Debugging</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Include AOS JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,  // Animation speed in milliseconds
+        once: true      // Ensures animation only happens once per scroll
+    });
+</script>
+
+
+<!-- Project Section -->
+<section id="projects" class="py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-extrabold mb-8">🚀 My Projects</h2>
+
+        <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project Card 1 -->
+            <div class="project-card bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-700 cursor-pointer"
+                onclick="openProject(1)">
+                <img src="img/acc.PNG" alt="Project 1" class="w-full h-48 object-cover rounded">
+                <h3 class="text-2xl font-bold mt-4">Accounts Manager</h3>
+                <p class="text-gray-400 mt-2">Secure your Transactions and keep record of your accounts.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-2">
+                    <span class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Flutter</span>
+                    <span class="bg-green-600 text-white px-3 py-1 rounded text-sm">Firebase</span>
+                    <div class="popup-btns mt-4 flex gap-4">
+                        <a id="live-demo" href="#" target="_blank">⬇ Free Download </a>
+                        <a id="github-link" href="#" target="_blank">💻 GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-700 cursor-pointer"
+                onclick="openProject(2)">
+                <img src="img/firebase.png" alt="Project 2" class="w-full h-48 object-cover rounded">
+                <h3 class="text-2xl font-bold mt-4">Tic Tak Toe</h3>
+                <p class="text-gray-400 mt-2">Have fun Playing a competitive battle with friends or AI.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-2">
+                    <span class="bg-purple-600 text-white px-3 py-1 rounded text-sm">React</span>
+                    <span class="bg-yellow-600 text-white px-3 py-1 rounded text-sm">REST API</span>
+                    <div class="popup-btns mt-4 flex gap-4">
+                        <a id="live-demo" href="#" target="_blank">🔗 Live Demo</a>
+                        <a id="github-link" href="#" target="_blank">💻 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pop-up Container -->
+<div id="project-popup">
+    <div class="popup-content">
+        <!-- Close Button -->
+        <button class="close-btn" onclick="closeProject()">✖</button>
+
+        <!-- Content Grid -->
+        <div class="popup-grid">
+            <!-- Project Image -->
+             <div class="expandimage">
+                
+           
+        </div>
+
+            <!-- Project Details -->
+            <div>
+                <h2 id="project-title" class="text-3xl font-bold text-white"></h2>
+                <p id="project-description" class="text-gray-300 mt-4"></p>
+                <div class="popup-btns mt-4 flex gap-4">
+                    <a id="live-demo" href="#" target="_blank">🔗 Live Demo</a>
+                    <a id="github-link" href="#" target="_blank">💻 GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Testimonials Section -->
+<section id="testimonials" class="py-20 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="fade-up">What People Say</h2>
+
+        <div class="relative max-w-4xl mx-auto overflow-hidden">
+            <div id="testimonial-carousel" class="flex transition-transform duration-700 ease-in-out">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide w-full p-8 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-2xl text-center mx-2 shrink-0 transform transition-all duration-500 hover:scale-105 hover:shadow-xl relative">
+                    <span class="absolute top-3 left-4 text-6xl text-blue-500 opacity-30">❝</span>
+                    <p class="text-xl italic leading-relaxed mt-4">“An absolute pleasure to work with! Their attention to detail and expertise in Flutter is top-notch.”</p>
+                    <div class="mt-6 text-yellow-400 text-2xl">★★★★★</div>
+                    <h4 class="mt-3 font-bold text-blue-400 text-lg">- John Doe</h4>
+                    <span class="absolute bottom-2 right-4 text-6xl text-blue-500 opacity-30">❞</span>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide w-full p-8 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-2xl text-center mx-2 shrink-0 transform transition-all duration-500 hover:scale-105 hover:shadow-xl relative">
+                    <span class="absolute top-3 left-4 text-6xl text-blue-500 opacity-30">❝</span>
+                    <p class="text-xl italic leading-relaxed mt-4">“Highly professional and always delivers more than expected. Would love to work again!”</p>
+                    <div class="mt-6 text-yellow-400 text-2xl">★★★★★</div>
+                    <h4 class="mt-3 font-bold text-blue-400 text-lg">- Sarah Smith</h4>
+                    <span class="absolute bottom-2 right-4 text-6xl text-blue-500 opacity-30">❞</span>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide w-full p-8 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-2xl text-center mx-2 shrink-0 transform transition-all duration-500 hover:scale-105 hover:shadow-xl relative">
+                    <span class="absolute top-3 left-4 text-6xl text-blue-500 opacity-30">❝</span>
+                    <p class="text-xl italic leading-relaxed mt-4">“Great experience from start to finish! Super skilled developer with a keen eye for UI/UX.”</p>
+                    <div class="mt-6 text-yellow-400 text-2xl">★★★★★</div>
+                    <h4 class="mt-3 font-bold text-blue-400 text-lg">- Michael Lee</h4>
+                    <span class="absolute bottom-2 right-4 text-6xl text-blue-500 opacity-30">❞</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-center mt-6">
+            <button onclick="prevTestimonial()" class="mx-3 p-4 bg-gray-700 hover:bg-gray-600 rounded-full text-xl shadow-md">⬅️</button>
+            <button onclick="nextTestimonial()" class="mx-3 p-4 bg-gray-700 hover:bg-gray-600 rounded-full text-xl shadow-md">➡️</button>
+        </div>
+
+        <!-- Indicators (dots) -->
+        <div class="flex justify-center mt-6 space-x-3">
+            <span class="dot w-4 h-4 rounded-full cursor-pointer transition-all duration-300 bg-gray-600 hover:bg-blue-500" onclick="goToTestimonial(0)"></span>
+            <span class="dot w-4 h-4 rounded-full cursor-pointer transition-all duration-300 bg-gray-600 hover:bg-blue-500" onclick="goToTestimonial(1)"></span>
+            <span class="dot w-4 h-4 rounded-full cursor-pointer transition-all duration-300 bg-gray-600 hover:bg-blue-500" onclick="goToTestimonial(2)"></span>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Testimonial Carousel -->
+<script>
+    let index = 0;
+    const slides = document.querySelectorAll(".testimonial-slide");
+    const totalSlides = slides.length;
+    const dots = document.querySelectorAll(".dot");
+
+    function showTestimonial() {
+        const carousel = document.getElementById("testimonial-carousel");
+        if (index >= totalSlides) index = 0;
+        if (index < 0) index = totalSlides - 1;
+        const offset = -index * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+
+        // Update active dot
+        dots.forEach(dot => dot.classList.remove("bg-blue-500"));
+        dots[index].classList.add("bg-blue-500");
+    }
+
+    function nextTestimonial() {
+        index++;
+        showTestimonial();
+    }
+
+    function prevTestimonial() {
+        index--;
+        showTestimonial();
+    }
+
+    function goToTestimonial(slideIndex) {
+        index = slideIndex;
+        showTestimonial();
+    }
+
+    // Auto-slide every 5 seconds
+    setInterval(() => {
+        nextTestimonial();
+    }, 5000);
+</script>
+
+<!-- CSS Styles -->
+<style>
+    #testimonial-carousel {
+        display: flex;
+        width: 100%;
+    }
+
+    .testimonial-slide {
+        min-width: 100%;
+        transition: transform 0.7s ease-in-out, opacity 0.6s ease-in-out;
+        opacity: 0.9;
+    }
+
+    .testimonial-slide:hover {
+        opacity: 1;
+    }
+
+    .dot {
+        transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .dot:hover {
+        transform: scale(1.2);
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="blog" class="py-16 bg-gradient-to-r from-indigo-900 via-purple-800 to-blue-900">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-white mb-14 tracking-wide uppercase">Latest Blog Posts</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <!-- Blog Card 1 -->
+            <div class="relative bg-gray-900 p-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-2xl border-t-4 border-blue-400 group overflow-hidden">
+                <h3 class="text-2xl font-bold text-white transition duration-300 group-hover:text-blue-400">Understanding Flutter Performance</h3>
+                <p class="text-gray-300 mt-3">Flutter is great for UI, but optimizing performance is key...</p>
+
+                <div class="hidden-content collapsed mt-4" id="blog1">
+                    <p class="text-gray-400">
+                        Learn how to improve your Flutter app performance using state management, optimized widgets, and efficient API calls.
+                    </p>
+                </div>
+
+                <button onclick="toggleBlog('blog1', this)" class="mt-6 text-blue-400 hover:text-blue-300 font-semibold transition duration-200 flex items-center">
+                    Read More <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </button>
+
+                <div class="absolute top-0 right-0 w-16 h-16 bg-blue-500 opacity-10 group-hover:opacity-30 transform rotate-45"></div>
+            </div>
+
+            <!-- Blog Card 2 -->
+            <div class="relative bg-gray-900 p-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-2xl border-t-4 border-green-400 group overflow-hidden">
+                <h3 class="text-2xl font-bold text-white transition duration-300 group-hover:text-green-400">Mastering State Management</h3>
+                <p class="text-gray-300 mt-3">Choosing the right state management approach is crucial...</p>
+
+                <div class="hidden-content collapsed mt-4" id="blog2">
+                    <p class="text-gray-400">
+                        Explore Provider, Riverpod, and Bloc to manage state effectively and keep your Flutter app efficient and scalable.
+                    </p>
+                </div>
+
+                <button onclick="toggleBlog('blog2', this)" class="mt-6 text-green-400 hover:text-green-300 font-semibold transition duration-200 flex items-center">
+                    Read More <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </button>
+
+                <div class="absolute top-0 right-0 w-16 h-16 bg-green-500 opacity-10 group-hover:opacity-30 transform rotate-45"></div>
+            </div>
+
+            <!-- Blog Card 3 -->
+            <div class="relative bg-gray-900 p-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-2xl border-t-4 border-yellow-400 group overflow-hidden">
+                <h3 class="text-2xl font-bold text-white transition duration-300 group-hover:text-yellow-400">Why Tailwind CSS is Game-Changing</h3>
+                <p class="text-gray-300 mt-3">Tailwind CSS is redefining frontend development...</p>
+
+                <div class="hidden-content collapsed mt-4" id="blog3">
+                    <p class="text-gray-400">
+                        Learn how utility-first CSS speeds up development and keeps your UI consistent across projects.
+                    </p>
+                </div>
+
+                <button onclick="toggleBlog('blog3', this)" class="mt-6 text-yellow-400 hover:text-yellow-300 font-semibold transition duration-200 flex items-center">
+                    Read More <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </button>
+
+                <div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500 opacity-10 group-hover:opacity-30 transform rotate-45"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hidden-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+    .expanded {
+        max-height: 500px;
+        opacity: 1;
+    }
+</style>
+
+<script>
+    function toggleBlog(id, btn) {
+        const content = document.getElementById(id);
+        if (content.classList.contains("collapsed")) {
+            content.classList.remove("collapsed");
+            content.classList.add("expanded");
+            btn.innerHTML = 'Read Less <span class="ml-2 transition-transform duration-300">←</span>';
+        } else {
+            content.classList.remove("expanded");
+            content.classList.add("collapsed");
+            btn.innerHTML = 'Read More <span class="ml-2 transition-transform duration-300">→</span>';
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Contact Section -->
+<section id="contact" class="py-16 bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-20">
+        
+        <!-- Success Message -->
+        <div id="success-message" class="hidden fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg text-center z-50">
+            ✅ Your message has been sent successfully!
+        </div>
+
+        <h2 class="text-4xl font-bold text-center mb-6" data-aos="fade-up">
+            <span class="typing-text">Let's Connect</span> <span class="cursor">|</span>
+        </h2>
+        <p class="text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="200">
+            Have a project in mind? Let’s build something amazing together!
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-10 items-start justify-between">
+            <!-- Contact Form -->
+            <form id="contactForm" action="https://formspree.io/f/xeoalogb" method="POST"
+                class="w-full md:w-1/2 bg-opacity-10 backdrop-blur-lg border border-gray-700 p-8 rounded-lg shadow-2xl"
+                style="background: rgba(255, 255, 255, 0.1);" data-aos="fade-right">
+                
+                <div class="mb-4">
+                    <label class="block text-gray-300 mb-2 font-semibold">Your Name</label>
+                    <input type="text" name="name" placeholder="John Doe" required
+                        class="contact-input w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-300 mb-2 font-semibold">Your Email</label>
+                    <input type="email" name="email" placeholder="example@email.com" required
+                        class="contact-input w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-300 mb-2 font-semibold">Your Message</label>
+                    <textarea name="message" rows="4" placeholder="Write your message..." required
+                        class="contact-input w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"></textarea>
+                </div>
+                
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-lg transform hover:scale-105 glow-effect">
+                    🚀 Send Message
+                </button>
+            </form>
+ <!-- Contact Info & Social Links -->
+ <div class="w-full md:w-1/2 text-center md:text-left" data-aos="fade-left">
+    <h3 class="text-2xl font-semibold text-gray-300 mb-6">📞 Let's Talk</h3>
+
+    <div class="space-y-6">
+        <div class="flex items-center gap-4 p-4 bg-gray-800 rounded-lg shadow-md border border-gray-700 hover:border-blue-500 transition-all">
+            <i class="fas fa-envelope text-blue-500 text-xl"></i>
+            <div>
+                <p class="text-gray-400 text-sm">Email Me</p>
+                <p class="text-gray-300 font-semibold">example@email.com</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-4 bg-gray-800 rounded-lg shadow-md border border-gray-700 hover:border-green-500 transition-all">
+            <i class="fas fa-phone text-green-500 text-xl"></i>
+            <div>
+                <p class="text-gray-400 text-sm">Call Me</p>
+                <p class="text-gray-300 font-semibold">+123 456 7890</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-4 bg-gray-800 rounded-lg shadow-md border border-gray-700 hover:border-red-500 transition-all">
+            <i class="fas fa-map-marker-alt text-red-500 text-xl"></i>
+            <div>
+                <p class="text-gray-400 text-sm">Location</p>
+                <p class="text-gray-300 font-semibold">Your City, Country</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Social Media Links -->
+    <h3 class="text-2xl font-semibold text-gray-300 mt-8">🌐 Connect With Me</h3>
+    <div class="flex justify-center md:justify-start gap-6 mt-4 floating-icons">
+        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+    </div>
+</div>
+</div>
+</div>
+</section>
+            
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Form Handling -->
+<script>
+    document.getElementById("contactForm").addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        const form = event.target;
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const successMessage = document.getElementById("success-message");
+                successMessage.classList.remove("hidden");
+                
+                setTimeout(() => {
+                    successMessage.classList.add("hidden");
+                }, 4000);
+                
+                form.reset();
+            } else {
+                alert("Oops! Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            alert("Error sending the message. Please check your connection.");
+        }
+    });
+</script>
+
+<!-- Custom CSS -->
+<style>
+    /* Glowing Send Button */
+    .glow-effect {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .glow-effect::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: 0.5s;
+    }
+
+    .glow-effect:hover::before {
+        left: 100%;
+    }
+
+    /* Social Icons */
+    .social-icon {
+        font-size: 1.5rem;
+        color: #ccc;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icon:hover {
+        color: #00acee;
+        transform: translateY(-5px);
+    }
+
+    /* Smooth Input Focus Effects */
+    .contact-input {
+        transition: all 0.3s ease;
+    }
+
+    .contact-input:focus {
+        box-shadow: 0 0 10px rgba(0, 162, 255, 0.8);
+    }
+
+    /* Fix Right Side */
+    .contact-info-box {
+        width: 100%;
+        max-width: 450px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: left;
+    }
+
+    /* Centered Success Notification */
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    text-align: center;
+}
+
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-10px); }
+        10% { opacity: 1; transform: translateY(0); }
+        90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+</style>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const typingText = document.querySelector(".typing-text");
+    const cursor = document.querySelector(".cursor");
+    const textArray = ["Let's Connect", "Say Hello!", "Work Together?"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isErasing = false;
+
+    function typeEffect() {
+        if (!isErasing) {
+            if (charIndex < textArray[textIndex].length) {
+                typingText.textContent = textArray[textIndex].substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeEffect, 150);
+            } else {
+                setTimeout(() => { isErasing = true; typeEffect(); }, 2000);
+            }
+        } else {
+            if (charIndex > 0) {
+                typingText.textContent = textArray[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeEffect, 100);
+            } else {
+                isErasing = false;
+                textIndex = (textIndex + 1) % textArray.length;
+                setTimeout(typeEffect, 500);
+            }
+        }
+    }
+
+    // Start Typing Effect
+    setTimeout(typeEffect, 1000);
+});
+
+
+</script>
+
+<!-- Custom CSS -->
+<style>
+    /* Glowing Send Button */
+    .glow-effect {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .glow-effect::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: 0.5s;
+    }
+
+    .glow-effect:hover::before {
+        left: 100%;
+    }
+
+    /* Floating Social Icons */
+    .floating-icons a {
+        display: inline-block;
+        font-size: 1.7rem;
+        color: #ccc;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .floating-icons a:hover {
+        color: #00acee;
+        transform: translateY(-5px) scale(1.1);
+    }
+
+    /* Smooth Input Focus Effects */
+    .contact-input {
+        transition: all 0.3s ease;
+        box-shadow: 0 0 5px rgba(0, 162, 255, 0.2);
+    }
+
+    .contact-input:focus {
+        box-shadow: 0 0 15px rgba(0, 162, 255, 0.8);
+        transform: scale(1.02);
+    }
+
+/* Cursor Blinking Effect - Always One Cursor */
+.cursor {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="text-center p-4 bg-gray-800">
+        <p>© 2025 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        AOS.init();
+        document.getElementById('darkModeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>
