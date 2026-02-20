@@ -509,7 +509,23 @@ hr{
                 </div>
             </div>
 
-            <!-- Project Card 2 -->
+             <!-- Project Card 2 -->
+            <div class="project-card bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-700 cursor-pointer"
+                onclick="openProject(1)">
+                <img src="img/acc.PNG" alt="Project 1" class="w-full h-48 object-cover rounded">
+                <h3 class="text-2xl font-bold mt-4">InvoiceBridge</h3>
+                <p class="text-gray-400 mt-2">A smart, seamless solution that connects your business directly with FBR for fast, compliant, and hassle-free digital invoicing.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-2">
+                    <span class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Flutter</span>
+                    <span class="bg-green-600 text-white px-3 py-1 rounded text-sm">Firebase</span>
+                    <div class="popup-btns mt-4 flex gap-4">
+                        <a id="live-demo" href="#" target="_blank">🔗 Live Demo </a>
+                        <a id="github-link" href="#" target="_blank">⭐ Subscription</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Card 3 -->
             <div class="project-card bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-700 cursor-pointer"
                 onclick="openProject(2)">
                 <img src="img/firebase.png" alt="Project 2" class="w-full h-48 object-cover rounded">
@@ -1126,6 +1142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
 </body>
 </html>
+
 
 
 
